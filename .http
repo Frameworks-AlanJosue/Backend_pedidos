@@ -1,0 +1,2 @@
+GET http://localhost:3001/api/v1/pedidos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJBbGFuIiwicm9sIjoiYWRtaW4ifQ.cP4fG3ut5ocfYylnz_3PfTGe-zTshtfRZZX5Ve4cd7I
