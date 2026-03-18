@@ -1,4 +1,5 @@
 // rutas/pedidos.js
+import mongoose from "mongoose";
 import {
   creaPedido,
   listaPedidos,
@@ -79,14 +80,32 @@ export function pedidosRoutes(app) {
 
 
   // Eliminar un Pedido por ID
-  app.delete('/api/v1/pedidos/:id', async (req, res) => {
-    try {
-      const { deletedCount } = await eliminaPedido(req.params.id)
-      if (deletedCount === 0) return res.sendStatus(404)
-      return res.status(204).end()
-    } catch (err) {
-      console.error('Error Eliminando un Pedido', err)
-      return res.status(500).end()
+app.delete("/api/v1/pedidos/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        error: "ID de pedido inválido",
+      });
     }
-  })
+
+    const resultado = await eliminaPedido(id);
+
+    if (resultado.deletedCount === 0) {
+      return res.status(404).json({
+        error: "Pedido no encontrado",
+      });
+    }
+
+    return res.status(200).json({
+      mensaje: "Pedido eliminado correctamente",
+    });
+  } catch (error) {
+    console.error("Error al eliminar pedido:", error);
+    return res.status(500).json({
+      error: "Error interno del servidor",
+    });
+  }
+});
 }

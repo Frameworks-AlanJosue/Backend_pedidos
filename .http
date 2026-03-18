@@ -1,2 +1,65 @@
 GET http://localhost:3001/api/v1/pedidos
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJBbGFuIiwicm9sIjoiYWRtaW4ifQ.cP4fG3ut5ocfYylnz_3PfTGe-zTshtfRZZX5Ve4cd7I
+
+### =========================================
+### GET - Obtener todos los pedidos
+### =========================================
+GET http://localhost:3001/api/v1/pedidos
+
+
+### =========================================
+### GET - Buscar pedidos por nombre
+### =========================================
+GET http://localhost:3001/api/v1/pedidos?nombre=Juan%20Gabriel%20Lopez%20Beltran
+
+
+### =========================================
+### GET - Buscar pedidos por pagado
+### =========================================
+GET http://localhost:3001/api/v1/pedidos?pagado=NO%20PAGADO
+
+
+### =========================================
+### GET - Obtener pedido por ID
+### =========================================
+GET http://localhost:3001/api/v1/pedidos/69b639a4bc9a4f045be99418
+
+
+### =========================================
+### POST - Crear un nuevo pedido
+### =========================================
+@baseUrl = http://localhost:3001
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJBbGFuIiwicm9sIjoiYWRtaW4ifQ.cP4fG3ut5ocfYylnz_3PfTGe-zTshtfRZZX5Ve4cd7I
+
+### POST - Crear pedido
+POST {{baseUrl}}/api/v1/pedidos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nombre": "Alan Josué Zamarrón Ortiz",
+  "telefono": "4181234567",
+  "direccion": "Calle Principal #456, Dolores Hidalgo, Gto",
+  "fecha_solicitud": "2026-03-18T00:00:00.000Z",
+  "fecha_envio": "2026-03-20T00:00:00.000Z",
+  "total": 150,
+  "pagado": ["NO PAGADO"],
+  "comentario": "Pedido de prueba"
+}
+
+### =========================================
+### PATCH - Modificar un pedido existente
+### =========================================
+PATCH http://localhost:3001/api/v1/pedidos/69b639a4bc9a4f045be99418
+Content-Type: application/json
+
+{
+  "nombre": "Juan Gabriel Lopez Beltran Actualizado",
+  "comentario": "Pedido actualizado desde REST Client"
+}
+
+
+### =========================================
+### DELETE - Eliminar un pedido por ID
+### =========================================
+DELETE http://localhost:3001/api/v1/pedidos/69bb13e2b956e0ce6b8085ce
